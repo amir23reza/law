@@ -37,9 +37,9 @@ class Splash extends Component {
         });
         this.scaleLogo(1);
         return(
-            <LinearGradient colors={[colors.sunflower,colors.belizehole]} style={styles.linearWrapper}>
+            <LinearGradient colors={[colors.midnightblue,colors.clouds]} style={styles.linearWrapper}>
                 <View style={styles.wrapper}>
-                    <StatusBar hidden={true} />
+                    <StatusBar hidden={false} />
                     <Animated.View style={[{transform : [{scale : newScale}]},styles.logoWrapper]}>
                         <Image resizeMode="contain" source={require("../images/logo.png")} style={styles.logo}/>
                     </Animated.View>

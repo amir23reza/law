@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import Stack from './src/navigators/stackNavigator';
+import X from './src/screens/userProfile';
  
 export default class App extends Component{
   render() {
     return (
-      <Stack />
+      <X />
     )
   }
 }

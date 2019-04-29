@@ -13,6 +13,7 @@ import {
     Image
 } from 'react-native'
 import colors from '../../styles/colors';
+import CustomInput from "../../components/customInput";
 
 class RegularSignUp extends Component {
 
@@ -36,33 +37,45 @@ class RegularSignUp extends Component {
                         <Icon type="FontAwesome5" name="plus" style={styles.plusIcon}/>
                     </View>
                 </View>
-                <Item style={styles.item} rounded>
-                    <Input bordered style={styles.Input} placeholder="نام" value={this.state.name} onChangeText={(name) => {this.setState({name})}} />
-                </Item>
-                <Item style={styles.item} rounded>
-                    <Input rounded style={styles.Input} placeholder="ایمیل" value={this.state.email} onChangeText={(email) => {this.setState({email})}} />
-                </Item>
-                <Item style={styles.item} rounded>
-                    <Input success style={styles.Input} placeholder="کد ملی" value={this.state.national_code} onChangeText={(national_code) => {this.setState({national_code})}} />
-                </Item>
+                <CustomInput 
+                    type="text"
+                    placeholder="نام و نام خانوادگی"
+                    placeholderTextColor={colors.midnightblue}
+                />
+                <CustomInput 
+                    type="email"
+                    placeholder="ایمیل"
+                    placeholderTextColor={colors.midnightblue}
+                />
+                <CustomInput 
+                    type="phone"
+                    placeholder="کد ملی"
+                    placeholderTextColor={colors.midnightblue}
+                />
                 {
                     this.state.type === "edit" ? (
                         <View>
-                            <Item style={styles.item} rounded>
-                                <Input error style={styles.Input} placeholder="رمز عبور فعلی" secureTextEntry={true} />
-                            </Item>
-                            <Item style={styles.item} rounded>
-                                <Input error style={styles.Input} placeholder="رمز عبور جدید" secureTextEntry={true}/>
-                            </Item>
+                            <CustomInput 
+                                type="password"
+                                placeholder="رمز عبور فعلی"
+                                placeholderTextColor={colors.midnightblue}
+                            />
+                            <CustomInput 
+                                type="password"
+                                placeholder="رمز عبور جدید"
+                                placeholderTextColor={colors.midnightblue}
+                            />
                         </View>
                     ) : (
-                            <Item style={styles.item} rounded>
-                                <Input error style={styles.Input} placeholder="رمز عبور" />
-                            </Item>
+                        <CustomInput 
+                            type="password"
+                            placeholder="رمز عبور"
+                            placeholderTextColor={colors.midnightblue}
+                        />
                     )
                 }
-                <Button block style={styles.signUpBtn}>
-                    {this.state.type === "edit" ? (<Text>ویرایش</Text>) : (<Text>عضویت</Text>)}
+                <Button block  style={styles.btn}>
+                    {this.state.type === "edit" ? (<Text style={styles.btnTxt}>ویرایش</Text>) : (<Text style={styles.btnTxt}>عضویت</Text>)}
                 </Button>
             </Form>
         )
@@ -105,7 +118,7 @@ const styles = StyleSheet.create({
         position : "absolute" , 
         bottom : 0 , 
         right : 0 , 
-        backgroundColor : colors.orange , 
+        backgroundColor : colors.midnightblue , 
         borderRadius : 150 , 
         width : "30%" , 
         aspectRatio : 1/1 , 
@@ -115,7 +128,18 @@ const styles = StyleSheet.create({
     plusIcon : {
         color : colors.clouds , 
         fontSize : 20 ,    
-    }
+    }, 
+    btn : {
+        borderRadius : 15 , 
+        backgroundColor : colors.midnightblue,
+        width : '100%',
+        marginTop : 15,
+        alignSelf : 'center'
+    },
+    btnTxt : {
+        fontFamily : "IRANSans" , 
+        color : colors.clouds
+    } , 
 })
 
 export default RegularSignUp;

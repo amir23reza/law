@@ -14,6 +14,7 @@ import {
     Image
 } from 'react-native'
 import colors from '../../styles/colors';
+import CustomInput from '../../components/customInput';
 
 class LawyerSignUp extends Component {
 
@@ -39,36 +40,48 @@ class LawyerSignUp extends Component {
                         <Icon type="FontAwesome5" name="plus" style={styles.plusIcon}/>
                     </View>
                 </View>
-                <Item style={styles.item} rounded>
-                    <Input bordered style={styles.Input} placeholder="نام و نام خانوادگی" value={this.state.name} onChangeText={(name) => {this.setState({name})}} />
-                </Item>
-                <Item style={styles.item} rounded>
-                    <Input rounded style={styles.Input} placeholder="ایمیل" value={this.state.email} onChangeText={(email) => {this.setState({email})}} />
-                </Item>
-                <Item style={styles.item} rounded>
-                    <Input success style={styles.Input} placeholder="کد ملی" value={this.state.national_code} onChangeText={(national_code) => {this.setState({national_code})}} />
-                </Item>
+                <CustomInput 
+                    type="text"
+                    placeholder="نام و نام خانوادگی"
+                    placeholderTextColor={colors.midnightblue}
+                />
+                <CustomInput 
+                    type="email"
+                    placeholder="ایمیل"
+                    placeholderTextColor={colors.midnightblue}
+                />
+                <CustomInput 
+                    type="phone"
+                    placeholder="کد ملی"
+                    placeholderTextColor={colors.midnightblue}
+                />
                 {
                     this.state.type === "edit" ? (
                         <View>
-                            <Item style={styles.item} rounded>
-                                <Input error style={styles.Input} placeholder="رمز عبور فعلی" />
-                            </Item>
-                            <Item style={styles.item} rounded>
-                                <Input error style={styles.Input} placeholder="رمز عبور جدید" />
-                            </Item>
+                            <CustomInput 
+                                type="password"
+                                placeholder="رمز عبور فعلی"
+                                placeholderTextColor={colors.midnightblue}
+                            />
+                            <CustomInput 
+                                type="password"
+                                placeholder="رمز عبور جدید"
+                                placeholderTextColor={colors.midnightblue}
+                            />
                         </View>
                     ) : (
-                            <Item style={styles.item} rounded>
-                                <Input error style={styles.Input} placeholder="رمز عبور" />
-                            </Item>
+                        <CustomInput 
+                            type="password"
+                            placeholder="رمز عبور"
+                            placeholderTextColor={colors.midnightblue}
+                        />
                     )
                 }
                 <Item style={styles.item} rounded>
-                    <Textarea rowSpan={5} style={[{width : "100%"}, styles.Input]} placeholder="درباره من" value={this.state.aboutme} onChangeText={(aboutme) => {this.setState({aboutme})}} />
+                    <Textarea rowSpan={5} style={[{width : "100%"}, styles.Input]} placeholder="درباره من" value={this.state.aboutme} onChangeText={(aboutme) => {this.setState({aboutme})}} placeholderTextColor={colors.midnightblue} />
                 </Item>
-                <Button block  style={styles.signUpBtn}>
-                    {this.state.type === "edit" ? (<Text>ویرایش</Text>) : (<Text>عضویت</Text>)}
+                <Button block  style={styles.btn}>
+                    {this.state.type === "edit" ? (<Text style={styles.btnTxt}>ویرایش</Text>) : (<Text style={styles.btnTxt}>عضویت</Text>)}
                 </Button>
             </Form>
         )
@@ -77,13 +90,17 @@ class LawyerSignUp extends Component {
 
 const styles = StyleSheet.create({
     item : {
-        marginBottom : 15 , 
-        borderWidth : 0 , 
-        paddingHorizontal : 10 , 
-        backgroundColor : colors.clouds
+        color : colors.midnightblue , 
+        backgroundColor : 'rgba(255,255,255,0.65)' , 
+        borderRadius : 15,
+        paddingVertical : 15,
+        marginTop : 15
     } ,  
     Input : {
-        textAlign : "right" , 
+        textAlign : "center" , 
+        fontFamily : "IRANSans",
+        fontSize : 15,
+        color : colors.midnightblue
     } , 
     form : {
         marginVertical : 30
@@ -111,7 +128,7 @@ const styles = StyleSheet.create({
         position : "absolute" , 
         bottom : 0 , 
         right : 0 , 
-        backgroundColor : colors.orange , 
+        backgroundColor : colors.midnightblue , 
         borderRadius : 150 , 
         width : "30%" , 
         aspectRatio : 1/1 , 
@@ -121,7 +138,18 @@ const styles = StyleSheet.create({
     plusIcon : {
         color : colors.clouds , 
         fontSize : 20 ,    
-    }
+    }, 
+    btn : {
+        borderRadius : 15 , 
+        backgroundColor : colors.midnightblue,
+        width : '100%',
+        marginTop : 15,
+        alignSelf : 'center'
+    },
+    btnTxt : {
+        fontFamily : "IRANSans" , 
+        color : colors.clouds
+    } , 
 })
 
 export default LawyerSignUp;
