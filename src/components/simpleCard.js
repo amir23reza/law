@@ -14,18 +14,19 @@ class SimpleCard extends Component {
         return (
             <Card style={styles.simpleCard}>
                 <CardItem header style={styles.header}>
-                    <Body style={{ justifyContent: "center" , flex : 4 }}>
+                    <View style={{flex : 1}} />
+                    <View style={{flex : 4}}>
                         <Text style={styles.username}>{username}</Text>
-                    </Body>
-                    <Right style={{flex : 1}}>
+                    </View>
+                    <View style={{flex : 1}}>
                         <Thumbnail source={require("../images/user_logo.png")} />
-                    </Right>
+                    </View>
                 </CardItem>
                 <CardItem>
-                    <Body>
+                    <View>
                         <Title style={styles.questionTitle}>{title}</Title>
-                        <Text style={{ textAlign: 'right' }}>{description}</Text>
-                    </Body>
+                        <Text style={{ textAlign: 'justify' }}>{description}</Text>
+                    </View>
                 </CardItem>
                 
                     {
@@ -71,8 +72,9 @@ const styles = StyleSheet.create({
     simpleCard : {
         width : '90%' , 
         alignSelf : 'center', 
-        borderRadius : 10 , 
-        padding : 10
+        borderRadius : 15 , 
+        padding : '1%',
+        marginTop : 10
     } , 
     questionTitle : {
         color : colors.midnightblue , 
@@ -80,16 +82,14 @@ const styles = StyleSheet.create({
         alignSelf : "center"
     } , 
     header : { 
-        alignItems: "flex-end", 
-        alignContent: "flex-end", 
         borderBottomColor: colors.concrete, 
         borderBottomWidth: 0.5 
     } , 
     username : { 
-        textAlign: "right", 
+        textAlign: "center", 
         width: '100%' , 
-        color : colors.midnightblue , 
-        fontSize : 18 , 
+        color : colors.midnightblue ,  
+        fontFamily : "IRANSans",
     }
 })
 

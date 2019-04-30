@@ -41,16 +41,19 @@ class LawyerSignUp extends Component {
                     </View>
                 </View>
                 <CustomInput 
+                    value={this.state.name}
                     type="text"
                     placeholder="نام و نام خانوادگی"
                     placeholderTextColor={colors.midnightblue}
                 />
                 <CustomInput 
+                    value={this.state.email}
                     type="email"
                     placeholder="ایمیل"
                     placeholderTextColor={colors.midnightblue}
                 />
                 <CustomInput 
+                    value={this.state.national_code}
                     type="phone"
                     placeholder="کد ملی"
                     placeholderTextColor={colors.midnightblue}

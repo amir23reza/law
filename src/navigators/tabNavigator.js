@@ -11,7 +11,7 @@ const TabNavigator = createMaterialTopTabNavigator({
 } , {
     tabBarOptions : {
         activeTintColor : colors.clouds , 
-        inactiveTintColor : colors.concrete , 
+        inactiveTintColor : colors.clouds , 
         showIcon : true , 
         indicatorStyle : {
             //style for the bottom line of tabs
@@ -22,7 +22,7 @@ const TabNavigator = createMaterialTopTabNavigator({
             color : colors.clouds
         } , 
         style : {
-            backgroundColor : colors.wetasphalt , 
+            backgroundColor: "rgba(44,62,80,0.5)" , 
         }
     }
 });

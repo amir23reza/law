@@ -25,7 +25,7 @@ class PopularNews extends Component {
 
     static navigationOptions = {
         //tabBarLabel: ({ tintColor }) => (<Text style={{ color: tintColor }}>محبوب ترین سوالات</Text>) , 
-        tabBarIcon: ({ tintColor }) => (<Icon type="MaterialIcons" name="loyalty" style={{color : tintColor}} /> )
+        tabBarIcon: ({ tintColor }) => (<Icon type="FontAwesome5" name="gratipay" style={{color : tintColor}} /> )
     }
 
     fetchMore = () => {
@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
         flex : 1 , 
         alignContent : "center" , 
         justifyContent : "center" , 
-        backgroundColor : colors.clouds , 
     } , 
 })
 export default PopularNews

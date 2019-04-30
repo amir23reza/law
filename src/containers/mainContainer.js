@@ -10,7 +10,7 @@ import CustomHeader from '../components/customHeader';
 
 class MainContainer extends Component{
     render(){
-        const {right , body , left , content} = this.props;
+        const {right , body , left , content , type} = this.props;
         return (
           <ImageBackground
             style={{ flex: 1}}
@@ -29,9 +29,15 @@ class MainContainer extends Component{
                 right
               }
             />
-            <Content>
-              {content}
-            </Content>
+            {
+              type === "tab" ? (
+                content
+              ) : (
+                <Content>
+                  { content }
+                </Content>
+              )
+            }
           </ImageBackground>
         );
     }

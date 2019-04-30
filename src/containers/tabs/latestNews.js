@@ -26,7 +26,7 @@ class LatestNews extends Component{
 
     static navigationOptions = {
         //tabBarLabel: ({ tintColor }) => (<Text style={{ color: tintColor }}>آخرین سوالات</Text>),
-        tabBarIcon: ({ tintColor }) => ( <Icon type="MaterialIcons" name="whatshot" style={{color : tintColor}} /> )
+        tabBarIcon: ({ tintColor }) => (<Icon type="FontAwesome5" name="clock" style={{color : tintColor}} /> )
     }
 
     fetchMore = () => {
@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
         flex : 1 , 
         alignContent : "center" , 
         justifyContent : "center" , 
-        backgroundColor : colors.clouds , 
     } , 
 })
 export default LatestNews;

@@ -29,7 +29,7 @@ class MainPage extends Component {
         const {body} = this.props;
         if (body) {
             return (
-                <Body style={{flex: 3 }}>
+                <Body style={{flex: 2.5 }}>
                     {body}
                 </Body>
             )

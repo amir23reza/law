@@ -1,38 +1,44 @@
 import React, { Component } from 'react'
 import {
-    View , Image , StyleSheet , Text
+    View, StyleSheet, Text
 } from 'react-native';
 import {
-    Container , Content, Header, Left, Body , Icon , Title, Button , Right, List, ListItem
+    Content, Icon, Title, Button, List, ListItem
 } from 'native-base';
-import LinearGradient from 'react-native-linear-gradient';
+import MainContainer from '../containers/mainContainer';
+import CollapseContainer from '../containers/collapseContainer';
 import colors from '../styles/colors';
 import RegularSignUp from '../containers/forms/regularSignUp';
 import LawyerSignUp from '../containers/forms/lawyerSignUp';
-import Lists from '../containers/lists/lists';
 import users from '../data/users.json';
 import lists from '../data/statusList.json';
 const user = users[1];
 
-class Profile extends Component{
-    render(){
-        return(
-            <LinearGradient colors={[colors.midnightblue,colors.belizehole]} style={styles.linearWrapper}>
-                <Container style={styles.wrapper}>
-                    <Header transparent androidStatusBarColor="transparent">
-                        <Left>
-                            <Button transparent>
-                                <Icon type="FontAwesome5" name="angle-left" />
-                            </Button>
-                        </Left>
-                        <Body />
-                        <Right>
-                            <Title>
-                                پروفایل من
-                            </Title>
-                        </Right>
-                    </Header>
-                    <Content style={styles.content}>
+class Profile extends Component {
+    render() {
+        return (
+            <MainContainer
+                right={
+                    <Text />
+                }
+                body={
+                    <Title
+                        style={{
+                            textAlign: "center",
+                            width: "100%",
+                            fontFamily: "IRANSans"
+                        }}
+                    >
+                        پروفایل من
+                    </Title>
+                }
+                left={
+                    <Button transparent>
+                        <Icon type="FontAwesome5" name="angle-left" />
+                    </Button>
+                }
+                content={
+                    <View style={{width : '90%' , alignSelf : 'center'}}>
                         <View>
                             {
                                 user.type === "lawyer" ? (
@@ -55,61 +61,58 @@ class Profile extends Component{
                                     )
                             }
                         </View>
-                        <Content>
-                            <List>
+                        <View style={{marginBottom : 15}}>
                                 {
                                     lists.map((list) => {
-                                        return(
-                                            <View key={list.id}>
-                                                <ListItem itemHeader>
+                                        return (
+                                            <CollapseContainer
+                                                headerTxt={
                                                     <Text style={styles.listTitle}>{list.header}</Text> 
-                                                </ListItem>
-                                                <View style={styles.statusList}>
-                                                {list.items.map((item) => {
-                                                    return(
-                                                        <ListItem key={item.id}><Text style={styles.listItem}>{item.content}</Text></ListItem>
-                                                    )
-                                                } )}  
-                                                </View>  
-                                            </View>
+                                                }
+                                                content={
+                                                    list.items.map((item) => {
+                                                        return (
+                                                            <View key={item.key}>
+                                                                <Text  style={styles.listItem}>{item.content}</Text>
+                                                            </View>
+                                                        )
+                                                    })
+                                                }
+                                            />
                                         )
                                     })
                                 }
-                            </List>
-                        </Content>
-                    </Content>
-                </Container>
-            </LinearGradient>
+                        </View>
+                    </View>
+                }
+            />
         )
     }
 }
 
+
+
 const styles = StyleSheet.create({
-    linearWrapper : {
-        flex : 1
-    },  
-    wrapper : {
-        flex : 1 , 
-        backgroundColor : "transparent"
-    } , 
-    content : {
-        paddingHorizontal : "8%"
-    } , 
-    statusList:{
-        backgroundColor : "rgba(0,0,0,0.5)" , 
-        borderRadius : 5 , 
-        marginBottom : 15
-    } , 
-    listTitle : {
-        width : "100%" , 
-        textAlign : "right",  
-        fontSize : 19 , 
-        color : colors.orange
-    } , 
-    listItem : {
-        width : "100%" , 
-        textAlign : "right" , 
-        color : colors.clouds
+    statusList: {
+        backgroundColor: "rgba(0,0,0,0.5)",
+        borderRadius: 5,
+        marginBottom: 15
+    },
+    listTitle: {
+        width: "100%",
+        textAlign: "center",
+        fontSize: 16,
+        color: colors.clouds,
+        fontFamily : "IRANSans"
+    },
+    listItem: {
+        width: "100%",
+        textAlign: "right",
+        color: colors.midnightblue,
+        width : "100%",
+        fontFamily : "IRANSans",
+        borderBottomWidth : .5 , 
+        borderBottomColor : colors.midnightblue
     }
 })
 

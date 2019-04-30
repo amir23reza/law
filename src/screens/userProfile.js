@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image, Text, Linking } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import {
   Button,
   Icon,
   Title,
 } from "native-base";
 import MainContainer from '../containers/mainContainer'
-import Accordion from "../components/Accordion";
+import CollapseContainer from '../containers/collapseContainer';
 import UserCard from "../components/userCard";
 
 class UserProfile extends Component {
@@ -33,9 +33,56 @@ class UserProfile extends Component {
         content={
           <View>
             <UserCard />
-            <Accordion title="توییت ها" />
-            <Accordion title="سوال ها" />
-            <Accordion title="نظرات" />
+            <View style={{width : '95%' , alignSelf : 'center' , marginBottom : 15}}>
+              <CollapseContainer
+                headerTxt="توییت ها"
+                content={
+                  <View>
+                    <TouchableOpacity>
+                      <Text>لورم ایپسوم ...</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Text>لورم ایپسوم ...</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Text>لورم ایپسوم ...</Text>
+                    </TouchableOpacity>
+                  </View>
+                }
+              />
+              <CollapseContainer
+                headerTxt="سوال ها"
+                content={
+                  <View>
+                    <TouchableOpacity>
+                      <Text>لورم ایپسوم ...</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Text>لورم ایپسوم ...</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Text>لورم ایپسوم ...</Text>
+                    </TouchableOpacity>
+                  </View>
+                }
+              />
+              <CollapseContainer
+                headerTxt="نظرات"
+                content={
+                  <View>
+                    <TouchableOpacity>
+                      <Text>لورم ایپسوم ...</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Text>لورم ایپسوم ...</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Text>لورم ایپسوم ...</Text>
+                    </TouchableOpacity>
+                  </View>
+                }
+              />
+            </View>
           </View>
         }
       />

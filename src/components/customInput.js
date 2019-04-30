@@ -21,6 +21,7 @@ class CustomInput extends Component{
         this.state = {
             secureInput : !(props.type === "text" || props.type === "email" || props.type === "phone" ) ,
             scaleCheckmarkValue: new Animated.Value(0),
+            value : this.props.value != "" ? this.props.value : ""
         }
     }
 
@@ -39,8 +40,12 @@ class CustomInput extends Component{
         this.setState({secureInput : !this.state.secureInput});
     }
 
+    onChangeText = (value) => {
+        this.setState({value})
+    }
+
     render(){
-        const {type , onChangeText , showCheckMark , placeholder , placeholderTextColor , selectionColor} = this.props;
+        const {type , showCheckMark , placeholder , placeholderTextColor , selectionColor} = this.props;
         const { scaleCheckmarkValue } = this.state;
         const iconScale = scaleCheckmarkValue.interpolate({ // ? interpolate ?
             inputRange: [0, 0.5, 1],
@@ -78,7 +83,8 @@ class CustomInput extends Component{
                     secureTextEntry={this.state.secureInput}
                     selectionColor={selectionColor}
                     keyboardType={type === "email" ? "email-address" : type === "phone" ? "number-pad" : "default"}
-                    onChangeText={onChangeText}
+                    onChangeText={this.onChangeText}
+                    value={this.state.value}
                 />
             </View>
         )
