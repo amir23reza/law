@@ -22,12 +22,10 @@ class TweetCard extends Component {
                         <Thumbnail source={require("../images/user_logo.png")} />
                     </Right>
                 </CardItem>
-                <CardItem>
-                    <Body>
-                        <Text style={{ textAlign: 'right' }}>{tweet}</Text>
-                    </Body>
-                </CardItem>
-                <CardItem footer>
+                <View style={{display : 'flex' , position : 'relative' , margin : 15}}>
+                    <Text style={{ textAlign: 'justify' , fontFamily : "IRANSans"}}>{tweet}</Text>
+                </View>
+                <View style={{flexDirection : 'row-reverse'}}>
                     <View style={{ flex: 1 , alignContent : 'center' , alignItems : 'center' }}>
                         <TouchableOpacity>
                             <Text>
@@ -45,10 +43,9 @@ class TweetCard extends Component {
                     <View style={{ flex: 1 , alignContent : 'center' , alignItems : 'center' }}>
                         <Text>
                             <Icon type="FontAwesome5" name="share-alt" />
-                            اشتراک
                         </Text>
                     </View>
-                </CardItem>
+                </View>
             </Card>
         )
     }

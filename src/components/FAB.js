@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         position: 'absolute',
         right: 20,
+        bottom : 20 ,
         justifyContent: 'center',
         alignContent: 'center'
     }

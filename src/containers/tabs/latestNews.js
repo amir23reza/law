@@ -1,32 +1,29 @@
-import React , {Component} from 'react';
+import React, { Component } from 'react';
 import {
-    View , 
-    StyleSheet , 
-    FlatList ,
+    View,
+    StyleSheet,
+    FlatList,
     TouchableOpacity
 } from 'react-native';
-import {Icon } from 'native-base';
+import { Icon , Button } from 'native-base';
 import colors from '../../styles/colors';
-import FAB from '../../components/FAB';
 import questions from '../../data/questions.json';
 import SimpleCard from '../../components/simpleCard';
-import * as Animatable from 'react-native-animatable';
-let initPosition = 0;
 
-class LatestNews extends Component{
+class LatestNews extends Component {
 
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
-            isRefreshing : false , 
-            hasScrolled : false , 
-            scrollDirection : "up" , 
+            isRefreshing: false,
+            hasScrolled: false,
+            scrollDirection: "up",
         }
     }
 
     static navigationOptions = {
         //tabBarLabel: ({ tintColor }) => (<Text style={{ color: tintColor }}>آخرین سوالات</Text>),
-        tabBarIcon: ({ tintColor }) => (<Icon type="FontAwesome5" name="clock" style={{color : tintColor}} /> )
+        tabBarIcon: ({ tintColor }) => (<Icon type="FontAwesome5" name="clock" style={{ color: tintColor }} />)
     }
 
     fetchMore = () => {
@@ -35,15 +32,15 @@ class LatestNews extends Component{
         }
     };
 
-    render(){
-        questions.map((item)=>{
+    render() {
+        questions.map((item) => {
             item.key = item.id
         })
-        return(
+        return (
             <View style={styles.wrapper}>
                 <FlatList
                     data={questions}
-                    renderItem = {({item}) => (
+                    renderItem={({ item }) => (
                         <TouchableOpacity>
                             <SimpleCard
                                 username={item.username}
@@ -56,45 +53,30 @@ class LatestNews extends Component{
                             />
                         </TouchableOpacity>
                     )}
-                    refreshing = {this.state.isRefreshing}
-                    onRefresh = {() => {
-                        this.setState({isRefreshing : true});
-                        setTimeout(()=>{
+                    refreshing={this.state.isRefreshing}
+                    onRefresh={() => {
+                        this.setState({ isRefreshing: true });
+                        setTimeout(() => {
                             alert("refreshed");
-                            this.setState({isRefreshing : false});
-                        } , 2000)
+                            this.setState({ isRefreshing: false });
+                        }, 2000)
                     }}
                     onEndReached={this.fetchMore}
                     onEndReachedThreshold={0.1}
-                    onScroll = {(data) => {
-                        const position = data.nativeEvent.contentOffset.y;
-                        if(position > initPosition){
-                            console.log("down");
-                            this.setState({
-                                scrollDirection : "down",
-                            })
-                            
-                        } else {
-                            this.setState({
-                                scrollDirection : "up"
-                            })
-                        }
-                        initPosition = position;
-                    }}
                 />
-                <Animatable.View ref={(ref)=>{this.view = ref}}>
-                    <FAB backgroundColor={colors.orange} scrollDirection={this.state.scrollDirection} />
-                </Animatable.View>
+                <Button block style={{ backgroundColor: colors.emerland }}>
+                    <Icon type="FontAwesome5" name="plus" />
+                </Button>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    wrapper : {
-        flex : 1 , 
-        alignContent : "center" , 
-        justifyContent : "center" , 
-    } , 
+    wrapper: {
+        flex: 1,
+        alignContent: "center",
+        justifyContent: "center",
+    },
 })
 export default LatestNews;

@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
 import {
-    View , 
-    StyleSheet , 
-    FlatList ,
+    View,
+    StyleSheet,
+    FlatList,
     TouchableOpacity
 } from 'react-native';
-import { Icon } from 'native-base';
+import { Icon, Button } from 'native-base';
 import colors from '../../styles/colors';
-import FAB from '../../components/FAB';
 import TweetCard from '../../components/tweetCard';
 import tweets from '../../data/tweets.json';
-let initPosition = 0;
- 
+
 class Tweets extends Component {
 
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
-            isRefreshing : false , 
-            hasScrolled : false , 
-            scrollDirection : "up" , 
+            isRefreshing: false,
+            hasScrolled: false,
+            scrollDirection: "up",
         }
     }
 
@@ -35,52 +33,41 @@ class Tweets extends Component {
         alert('reachedEnd')
     };
 
-    render(){
-        tweets.map((item)=>{
+    render() {
+        tweets.map((item) => {
             item.key = item.id
         })
-        return(
+        return (
             <View style={styles.wrapper}>
                 <FlatList
                     data={tweets}
-                    renderItem = {({item}) => (
+                    renderItem={({ item }) => (
                         <TouchableOpacity>
-                            <TweetCard 
-                                username = {item.username}
-                                avatar = {item.avatar}
-                                tweet = {item.tweet}
-                                hits = {item.hits}
-                                comments = {item.comments}
-                                date = {item.date}
+                            <TweetCard
+                                username={item.username}
+                                avatar={item.avatar}
+                                tweet={item.tweet}
+                                hits={item.hits}
+                                comments={item.comments}
+                                date={item.date}
                             />
                         </TouchableOpacity>
                     )}
-                    refreshing = {this.state.isRefreshing}
-                    onRefresh = {() => {
-                        this.setState({isRefreshing : true});
-                        setTimeout(()=>{
+                    refreshing={this.state.isRefreshing}
+                    onRefresh={() => {
+                        this.setState({ isRefreshing: true });
+                        setTimeout(() => {
                             alert("refreshed");
-                            this.setState({isRefreshing : false});
-                        } , 2000)
+                            this.setState({ isRefreshing: false });
+                        }, 2000)
                     }}
                     onEndReached={this.fetchMore}
                     onEndReachedThreshold={0.1}
-                    onScroll = {(data) => {
-                        const position = data.nativeEvent.contentOffset.y;
-                        if(position > initPosition){
-                            console.log("down");
-                            this.setState({
-                                scrollDirection : "down"
-                            })
-                        } else {
-                            this.setState({
-                                scrollDirection : "up"
-                            })
-                        }
-                        initPosition = position;
-                    }}
+
                 />
-                <FAB iconName="pen" backgroundColor={colors.sunflower} scrollDirection={this.state.scrollDirection} />
+                <Button block style={{ backgroundColor: colors.emerland }}>
+                    <Icon type="FontAwesome5" name="pen" />
+                </Button>
             </View>
         )
     }

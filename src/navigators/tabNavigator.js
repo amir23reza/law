@@ -7,7 +7,7 @@ import colors from '../styles/colors';
 const TabNavigator = createMaterialTopTabNavigator({
     "آخرین سوالات ": LatestNews,
     "محبوب ترین سوالات": PopularNews,
-    "توییت ها": Tweets
+    "توییت ها": Tweets,
 } , {
     tabBarOptions : {
         activeTintColor : colors.clouds , 
@@ -16,10 +16,12 @@ const TabNavigator = createMaterialTopTabNavigator({
         indicatorStyle : {
             //style for the bottom line of tabs
             color : colors.emerland , 
-            backgroundColor : colors.clouds
+            backgroundColor : colors.clouds,
+            height : 5
         } ,
         iconStyle : {
-            color : colors.clouds
+            color : colors.clouds,
+            width : '100%'
         } , 
         style : {
             backgroundColor: "rgba(44,62,80,0.5)" , 

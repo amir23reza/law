@@ -1,31 +1,29 @@
 import React, { Component } from 'react';
 import {
-    View , 
-    StyleSheet , 
-    FlatList ,
+    View,
+    StyleSheet,
+    FlatList,
     TouchableOpacity
 } from 'react-native';
-import { Icon } from 'native-base';
+import { Icon , Button} from 'native-base';
 import colors from '../../styles/colors';
-import FAB from '../../components/FAB';
 import questions from '../../data/questions.json';
 import SimpleCard from '../../components/simpleCard';
-let initPosition = 0;
 
 class PopularNews extends Component {
 
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
-            isRefreshing : false , 
-            hasScrolled : false , 
-            scrollDirection : "up" , 
+            isRefreshing: false,
+            hasScrolled: false,
+            scrollDirection: "up",
         }
     }
 
     static navigationOptions = {
         //tabBarLabel: ({ tintColor }) => (<Text style={{ color: tintColor }}>محبوب ترین سوالات</Text>) , 
-        tabBarIcon: ({ tintColor }) => (<Icon type="FontAwesome5" name="gratipay" style={{color : tintColor}} /> )
+        tabBarIcon: ({ tintColor }) => (<Icon type="FontAwesome5" name="gratipay" style={{ color: tintColor }} />)
     }
 
     fetchMore = () => {
@@ -35,15 +33,15 @@ class PopularNews extends Component {
         alert('reachedEnd')
     };
 
-    render(){
-        questions.map((item)=>{
+    render() {
+        questions.map((item) => {
             item.key = item.id
         })
-        return(
+        return (
             <View style={styles.wrapper}>
                 <FlatList
                     data={questions}
-                    renderItem = {({item}) => (
+                    renderItem={({ item }) => (
                         <TouchableOpacity>
                             <SimpleCard
                                 username={item.username}
@@ -52,46 +50,34 @@ class PopularNews extends Component {
                                 description={item.description}
                                 hits={item.hits}
                                 comments={item.commentsNo}
-                                //dateTime={item.dateTime}
+                            //dateTime={item.dateTime}
                             />
                         </TouchableOpacity>
                     )}
-                    refreshing = {this.state.isRefreshing}
-                    onRefresh = {() => {
-                        this.setState({isRefreshing : true});
-                        setTimeout(()=>{
+                    refreshing={this.state.isRefreshing}
+                    onRefresh={() => {
+                        this.setState({ isRefreshing: true });
+                        setTimeout(() => {
                             alert("refreshed");
-                            this.setState({isRefreshing : false});
-                        } , 2000)
+                            this.setState({ isRefreshing: false });
+                        }, 2000)
                     }}
                     onEndReached={this.fetchMore}
                     onEndReachedThreshold={0.1}
-                    onScroll = {(data) => {
-                        const position = data.nativeEvent.contentOffset.y;
-                        if(position > initPosition){
-                            console.log("down");
-                            this.setState({
-                                scrollDirection : "down"
-                            })
-                        } else {
-                            this.setState({
-                                scrollDirection : "up"
-                            })
-                        }
-                        initPosition = position;
-                    }}
                 />
-                <FAB backgroundColor={colors.sunflower} scrollDirection={this.state.scrollDirection} />
+                <Button block style={{ backgroundColor: colors.emerland }}>
+                    <Icon type="FontAwesome5" name="plus" />
+                </Button>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    wrapper : {
-        flex : 1 , 
-        alignContent : "center" , 
-        justifyContent : "center" , 
-    } , 
+    wrapper: {
+        flex: 1,
+        alignContent: "center",
+        justifyContent: "center",
+    },
 })
 export default PopularNews

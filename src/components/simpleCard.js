@@ -22,43 +22,47 @@ class SimpleCard extends Component {
                         <Thumbnail source={require("../images/user_logo.png")} />
                     </View>
                 </CardItem>
-                <CardItem>
-                    <View>
+                    <View style={{padding : '2%' , borderBottomWidth : 0.2 , borderBottomColor : colors.concrete}}>
                         <Title style={styles.questionTitle}>{title}</Title>
-                        <Text style={{ textAlign: 'justify' }}>{description}</Text>
+                        <Text style={{ textAlign: 'justify' , fontFamily : "IRANSans" }}>{description}</Text>
                     </View>
-                </CardItem>
                 
                     {
                         hits != null ? (
                             <CardItem footer>
-                                <View style={{ flex: 1 }}>
-                                    <TouchableOpacity>
-                                        <Text>
-                                            <Icon type="FontAwesome5" name="heart" solid={1 === 2 ? false : true} style={{ color: 1 === 2 ? colors.midnightblue : colors.alizarin }} />
-                                            {hits}
-                                        </Text>
-                                    </TouchableOpacity>
+                                <View style={{flex : 1}} />
+                                <View style={{ flex: 2.5 , flexDirection : 'row-reverse'  }}>
+                                    <View style={{ flex: 1, alignItems: 'center' }}>
+                                        <TouchableOpacity>
+                                            <Text>
+                                                <Icon type="FontAwesome5" name="heart" solid={1 === 2 ? false : true} style={{ color: 1 === 2 ? colors.midnightblue : colors.alizarin }} />
+                                                {hits}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={{ flex: 1 , alignItems : 'center' }}>
+                                        <TouchableOpacity>
+                                            <Text>
+                                                <Icon type="FontAwesome5" name="comment" />
+                                                {comments}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    </View>
                                 </View>
-                                <View style={{ flex: 1 }}>
-                                    <TouchableOpacity>
-                                        <Text>
-                                            <Icon type="FontAwesome5" name="comment" />
-                                            {comments}
-                                        </Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={{ flex: 3 }}></View>
+                                <View style={{ flex: 1 }} />
                             </CardItem>
                         ) : (
                             <CardItem footer>
-                                <View style={{flex : 2}}>
-                                    <Text style={{color : colors.midnightblue}}>
-                                        <Icon type="FontAwesome5" name="clock" style={{color : colors.midnightblue}}/>
-                                        {dateTime}
-                                    </Text>
+                                <View style={{ flex: 1 }} />
+                                <View>
+                                    <View style={{ flex: 2 }}>
+                                        <Text style={{ color: colors.midnightblue }}>
+                                            {" "+dateTime+" "}
+                                            <Icon type="FontAwesome5" name="clock" style={{ color: colors.midnightblue }} />
+                                        </Text>
+                                    </View>
                                 </View>
-                                <View style={{flex : 3}}></View>
+                                <View style={{ flex: 1 }} />
                             </CardItem>
                         )
                     }
