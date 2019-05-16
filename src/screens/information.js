@@ -24,7 +24,7 @@ class Information extends Component {
                     </View>
                 }
                 left={
-                    <Button transparent>
+                    <Button transparent onPress={() => { this.props.navigation.navigate('MainScreen') }}>
                         <Icon type="FontAwesome5" name="angle-left" />
                     </Button>
                 }

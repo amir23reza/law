@@ -15,7 +15,7 @@ class AddQuestion extends Component {
     return (
       <MainContainer
         right={
-          <Button transparent>
+          <Button transparent onPress={() => { this.props.navigation.navigate('MainScreen') }}>
             <Icon
               type="FontAwesome5"
               name="times"

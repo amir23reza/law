@@ -10,7 +10,7 @@ class MainScreen extends Component {
         return(
             <MainContainer 
                 right={ 
-                    <Button transparent>
+                    <Button transparent onPress={()=>{this.props.navigation.navigate('Profile')}}>
                         <Text style={{fontFamily : "IRANSans" , color : 'white'}}>پروفایل</Text>
                     </Button>
                 }
@@ -26,7 +26,7 @@ class MainScreen extends Component {
                     </Title>
                 }
                 left={
-                    <Button transparent>
+                    <Button transparent onPress={() => { this.props.navigation.navigate('Information') }}>
                         <Text style={{ fontFamily: "IRANSans", color: 'white' }}>درباره ما</Text>
                     </Button>
                 }

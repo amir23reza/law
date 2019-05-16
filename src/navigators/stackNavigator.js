@@ -6,7 +6,9 @@ import MainScreen from '../screens/mainScreen';
 import Profile from "../screens/profile";
 import SignIn from "../screens/signIn";
 import SignUp from "../screens/signUp";
-import userProfile from '../screens/userProfile';
+import UserProfile from '../screens/userProfile';
+import Information from '../screens/information';
+import Detail from '../screens/detail';
 
 const stackNavigator = createStackNavigator({
     AppIntro : {screen : AppIntro},
@@ -16,7 +18,9 @@ const stackNavigator = createStackNavigator({
     Profile : {screen : Profile},
     SignIn : {screen : SignIn},
     SignUp : {screen : SignUp},
-    userProfile : {screen : userProfile},
+    UserProfile: { screen: UserProfile},
+    Information: { screen: Information},
+    Detail: { screen: Detail },
 },{
     headerMode : 'none',
     mode : "card"

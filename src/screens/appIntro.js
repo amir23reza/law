@@ -6,12 +6,17 @@ import {
     ImageBackground
 } from 'react-native';
 import { Container, Title  } from 'native-base';
+import { connect } from 'react-redux';
+import {AddNavigation} from '../redux/actions/actions';
 import Swiper from 'react-native-swiper';
 import colors from '../styles/colors';
 import SlideContent from '../containers/slides/slideContent';
 import CustomHeader from '../components/customHeader';
 
 class Intro extends Component {
+    componentWillMount(){
+        this.props.addNav(this.props.navigation)
+    }
     render() {
         return (
             <ImageBackground
@@ -116,4 +121,14 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Intro;
+const mapStateToProps = (state) => {
+    return {}
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addNav: (property) => { dispatch(AddNavigation(property)) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Intro)

@@ -9,7 +9,6 @@ import {
     View
 } from 'react-native';
 import colors from '../styles/colors';
-import SignInForm from '../containers/forms/SignInForm';
 import MainContainer from '../containers/mainContainer';
 import CustomInput from '../components/customInput';
 
@@ -51,7 +50,7 @@ class SignIn extends Component {
                             placeholderTextColor={colors.midnightblue}
                         />
                         </View>
-                        <Button block style={styles.btn} onPress={()=>{/*this.props.navigation.navigate("Sections")*/}}>
+                        <Button block style={styles.btn} onPress={()=>{this.props.navigation.navigate("MainScreen")}}>
                         <Text style={styles.btnTxt}>ورود</Text>
                         </Button>
                     </View>

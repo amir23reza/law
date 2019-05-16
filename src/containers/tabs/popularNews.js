@@ -6,6 +6,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { Icon , Button} from 'native-base';
+import { connect } from 'react-redux';
 import colors from '../../styles/colors';
 import questions from '../../data/questions.json';
 import SimpleCard from '../../components/simpleCard';
@@ -42,7 +43,7 @@ class PopularNews extends Component {
                 <FlatList
                     data={questions}
                     renderItem={({ item }) => (
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => { this.props.navProperty.navigate('Detail') }}>
                             <SimpleCard
                                 username={item.username}
                                 avatar={item.avatar}
@@ -65,8 +66,8 @@ class PopularNews extends Component {
                     onEndReached={this.fetchMore}
                     onEndReachedThreshold={0.1}
                 />
-                <Button block style={{ backgroundColor: colors.emerland }}>
-                    <Icon type="FontAwesome5" name="plus" />
+                <Button block style={{ backgroundColor: colors.emerland }} onPress={() => { this.props.navProperty.navigate('AddQuestion') }}>
+                    <Icon type="FontAwesome5" name="plus" style={{ color: colors.clouds }} />
                 </Button>
             </View>
         )
@@ -80,4 +81,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
 })
-export default PopularNews
+
+const mapStateToProps = (state) => {
+    return {
+        navProperty: state.navReducer.navProperty
+    }
+}
+
+export default connect(mapStateToProps)(PopularNews)

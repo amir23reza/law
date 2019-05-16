@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import {
     Animated , 
     Easing , 
-    View , 
+    View ,  
     Image , 
     StyleSheet , 
-    StatusBar
+    StatusBar,
+    ActivityIndicator
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import MainContainer from '../containers/mainContainer';
 import colors from '../styles/colors';
 
 class Splash extends Component {
@@ -37,22 +38,21 @@ class Splash extends Component {
         });
         this.scaleLogo(1);
         return(
-            <LinearGradient colors={[colors.midnightblue,colors.clouds]} style={styles.linearWrapper}>
-                <View style={styles.wrapper}>
-                    <StatusBar hidden={false} />
-                    <Animated.View style={[{transform : [{scale : newScale}]},styles.logoWrapper]}>
-                        <Image resizeMode="contain" source={require("../images/logo.png")} style={styles.logo}/>
-                    </Animated.View>
-                </View>
-            </LinearGradient>
+            <MainContainer
+                content={
+                    <View style={styles.wrapper}>
+                        <Animated.View style={[{ transform: [{ scale: newScale }] }, styles.logoWrapper]}>
+                            <Image resizeMode="contain" source={require("../images/logo.png")} style={styles.logo} />
+                        </Animated.View>
+                        <ActivityIndicator size="large" color={colors.midnightblue} />
+                    </View>
+                }  
+             />
         )
     }
 }
 
 const styles = StyleSheet.create({
-    linearWrapper : {
-        flex : 1
-    } , 
     wrapper : {
         flex : 1 ,
         backgroundColor : "transparent" , 

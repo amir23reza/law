@@ -3,7 +3,8 @@ import {
     StyleSheet,
     View , 
     Text , 
-    Image
+    Image,
+    TouchableOpacity
 } from 'react-native';
 import {
     Icon , 
@@ -30,7 +31,7 @@ class Detail extends Component{
                     </View>
                 }
                 left={
-                    <Button transparent>
+                    <Button transparent onPress={() => { this.props.navigation.navigate('MainScreen') }}>
                         <Icon type="FontAwesome5" name="angle-left" />
                     </Button>
                 }
@@ -42,9 +43,9 @@ class Detail extends Component{
                                     <Text style={{fontFamily : "IRANSans"}}>امیررضا حق وردی</Text>
                                 </View>
                                 <View style={{ flex: 1 }}>
-                                    <View style={styles.avatarWrapper}>
+                                    <TouchableOpacity style={styles.avatarWrapper} onPress={() => { this.props.navigation.navigate('UserProfile') }}>
                                         <Image source={require('../images/user_logo.png')} style={styles.avatar} resizeMode="contain" />
-                                    </View>
+                                    </TouchableOpacity>
                                 </View>
                                 <View style={{ flex: 2 , justifyContent : 'center' , alignItems : 'center' }}>
                                     <Text style={{fontFamily : "IRANSans"}}>43دقیقه قبل </Text>

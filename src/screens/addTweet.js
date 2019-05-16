@@ -23,7 +23,7 @@ class AddTweet extends Component { // later on implement image picker
         return(
             <MainContainer
                 right={
-                    <Button transparent>
+                    <Button transparent onPress={()=>{this.props.navigation.navigate('MainScreen')}}>
                         <Icon type="FontAwesome5" name="times" style={{color : colors.midnightblue}} />
                     </Button>
                 }   
