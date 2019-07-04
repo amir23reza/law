@@ -9,8 +9,34 @@ import {
 import colors from "../styles/colors";
 import MainContainer from "../containers/mainContainer";
 import CustomInput from '../components/customInput';
+import Axios from "axios";
 
 class AddQuestion extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      title : null , 
+      content : null 
+    }
+  }
+
+  addQuestion = () => {
+    Axios.post('http://192.168.1.4:4001/questions/add', {
+      "userId": "5d18feb0cdd97f3308e01bd4",
+      "title": this.state.title,
+      "content": this.state.content , 
+      "userName" : "amir reza"
+    }).then(res => {
+      console.log(res);
+      if(res.status == 200){
+        alert('ok');
+      }
+    }).catch(err => {
+      alert(err)
+    })
+  }
+
   render() {
     return (
       <MainContainer
@@ -25,7 +51,7 @@ class AddQuestion extends Component {
         }
         body={<Text />}
         left={
-          <Button style={{ backgroundColor: colors.midnightblue, borderRadius: 15 }}>
+          <Button style={{ backgroundColor: colors.midnightblue, borderRadius: 15 }} onPress={this.addQuestion}>
             <Text style={{ color: colors.clouds }}>ثبت</Text>
           </Button>
         }
@@ -46,6 +72,7 @@ class AddQuestion extends Component {
                     type="text"
                     placeholder="عنوان سوال"
                     placeholderTextColor={colors.midnightblue}
+                    onTextChange={(title) => { this.setState({title}) }}
                 />
                 <Textarea
                   style={{
@@ -58,9 +85,11 @@ class AddQuestion extends Component {
                   }}
                   placeholder="متن سوال"
                   placeholderTextColor={colors.midnightblue}
+                  onChangeText={(content) => { this.setState({ content })}}
+                  value={this.state.content}
                   rowSpan={10}
                 />
-                <View style={{ width: "100%", aspectRatio: 1 / 1 }}>
+                {/* <View style={{ width: "100%", aspectRatio: 1 / 1 }}>
                   <Image
                     source={require("../images/law.jpg")}
                     resizeMode="contain"
@@ -70,7 +99,7 @@ class AddQuestion extends Component {
                       height: "100%",
                     }}
                   />
-                </View>
+                </View> */}
               </View>
               <View style={{ flex: 1, width: "100%", aspectRatio: 1 / 1 }}>
                 <Image
@@ -80,9 +109,9 @@ class AddQuestion extends Component {
                 />
               </View>
             </View>
-            <Button style={styles.addPhoto} >
+            {/* <Button style={styles.addPhoto} >
                 <Text style={{width : '100%', fontFamily : "IRANSans" , textAlign : 'center'}}>افزودن عکس</Text>
-            </Button>
+            </Button> */}
           </View>
         }
       />

@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import colors from '../../styles/colors';
 import TweetCard from '../../components/tweetCard';
 import tweets from '../../data/tweets.json';
+import Axios from 'axios';
 
 class Tweets extends Component {
 
@@ -34,10 +35,21 @@ class Tweets extends Component {
         alert('reachedEnd')
     };
 
+    getTweets = () => {
+        Axios.get('http://192.168.1.4:4001/tweets/fetch')
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
     render() {
         tweets.map((item) => {
             item.key = item.id
         })
+        this.getTweets();
         return (
             <View style={styles.wrapper}>
                 <FlatList

@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import colors from '../../styles/colors';
 import questions from '../../data/questions.json';
 import SimpleCard from '../../components/simpleCard';
+import Axios from 'axios';
 
 class LatestNews extends Component {
 
@@ -33,10 +34,21 @@ class LatestNews extends Component {
         }
     };
 
+    getQuestions = () => {
+        Axios.get('http://192.168.1.4:4001/questions/byTime')
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     render() {
         questions.map((item) => {
             item.key = item.id
         })
+        this.getQuestions();
         return (
             <View style={styles.wrapper}>
                 <FlatList

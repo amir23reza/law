@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import colors from '../../styles/colors';
 import questions from '../../data/questions.json';
 import SimpleCard from '../../components/simpleCard';
+import Axios from 'axios';
 
 class PopularNews extends Component {
 
@@ -34,10 +35,21 @@ class PopularNews extends Component {
         alert('reachedEnd')
     };
 
+    getQuestions = () => {
+        Axios.get('http://192.168.1.4:4001/questions/byLike')
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     render() {
         questions.map((item) => {
             item.key = item.id
         })
+        this.getQuestions();
         return (
             <View style={styles.wrapper}>
                 <FlatList

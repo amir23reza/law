@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Splash from './src/screens/splashScreen';
 import Stack from './src/navigators/stackNavigator';
+import X from './src/screens/detail'
 // --- redux --- //
 import {Provider} from 'react-redux'
 import {createStore} from 'redux';
@@ -23,7 +24,7 @@ export default class App extends Component{
   render() {
     setTimeout(() => {
       this.setState({isSplash : false})
-    }, 2000);
+    }, 500);
     return (
         <Provider store={store}>
           {this.state.isSplash ? <Splash /> : <Stack />}
@@ -31,3 +32,5 @@ export default class App extends Component{
     )
   }
 }
+
+// { this.state.isSplash ? <Splash /> : <Stack /> } <X />

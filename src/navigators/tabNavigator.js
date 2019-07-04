@@ -26,7 +26,8 @@ const TabNavigator = createMaterialTopTabNavigator({
         style : {
             backgroundColor: "rgba(44,62,80,0.5)" , 
         }
-    }
+    } , 
+    lazy : true
 });
 
 const AppContainer = createAppContainer(TabNavigator);

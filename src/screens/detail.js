@@ -14,16 +14,86 @@ import {
 } from 'native-base';
 import colors from '../styles/colors';
 import MainContainer from '../containers/mainContainer';
+import Axios from 'axios';
 const array = [1,2,3,4,5];
 
 class Detail extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            isLiked : false , 
+            _id : null , 
+            commentBody : null , 
+            comments : []
+        }
+    }
+    componentWillMount(){
+        Axios.get('http://192.168.1.4:4001/likes/isLiked/' + '5d1a338e1177ae45802d6931' + '/' +'5d18feb0cdd97f3308e01bd4') // for id / user id
+        .then(res=>{
+            if (res.data.data !== null) {
+                this.setState({ isLiked: true, _id: res.data.data._id });
+            }
+        })
+        .catch(err => {
+            alert(err)
+        })
+    }
+
+    toggleLike = () => {
+        if(this.state.isLiked){
+            Axios.delete('http://192.168.1.4:4001/likes/unlike/'+this.state._id)
+            .then(res => {
+                if(res.data.data.deletedCount == 1){
+                    this.setState({isLiked : false , _id : null})
+                }
+            })
+            .catch(err => {
+                alert(err)
+            })
+        } else {
+            Axios.post('http://192.168.1.4:4001/likes/hit', {
+                "userId": "5d18feb0cdd97f3308e01bd4",
+                "type": "tweet",
+                "forId": "5d1a338e1177ae45802d6931"
+            }).then(res=>{
+                if (res.data.newLike._id){
+                    this.setState({ isLiked: true, _id: res.data.newLike._id})
+                }
+            }).catch(err=>{
+                alert(err)
+            })
+        }
+    }
+
+    addComment = () => {
+        Axios.post('http://192.168.1.4:4001/comments/add', {
+            "userId": "5d18feb0cdd97f3308e01bd4",
+            "comment": this.state.commentBody,
+            "type": "tweet",
+            "forId": "5d1a338e1177ae45802d6931"
+        }).then(res => {
+            if(res.data.newComment){
+                alert('نظر شما با موفقیت ثبت شد');
+                Axios.get('http://192.168.1.4:4001/comments/getComments/' +'5d1a338e1177ae45802d6931')
+                .then(resp => {
+                    console.log(resp);
+                    this.setState({comments : resp.data.data});
+                })
+                .catch(err => {
+                    alert(err)
+                })
+            }
+        }).catch(err => {
+            alert(err)
+        })
+    }
+
     render(){
         return(
             <MainContainer 
                 right={
-                    <Button transparent>
-                        <Icon type="FontAwesome5" name="share-alt" />
-                    </Button>
+                    <Text></Text>
                 }
                 body={
                     <View style={styles.imgContainer}>
@@ -53,9 +123,15 @@ class Detail extends Component{
                             </View>
                             <View style={{padding : '2%'}}>
                                 <Text style={styles.title}>لورم ایپسوم</Text>
+                                {/* <View style={styles.mainImgContainer}>
+                                    <Image style={styles.mainImg} source={require('../images/law.jpg')} />
+                                </View> */}
                                 <Text style={styles.content}>
                                     لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
                                 </Text>
+                                <TouchableOpacity style={{alignItems : 'center'}} onPress={this.toggleLike}>
+                                    <Icon type="FontAwesome5" name="heart" solid={this.state.isLiked} style={{color : colors.alizarin}} />
+                                </TouchableOpacity>
                             </View>
                         </Card>
                         <Card style={styles.card}>
@@ -84,10 +160,16 @@ class Detail extends Component{
                         </Card>
                         <View style={styles.writeComment}>
                             <View style={{flex : 5}}>
-                                <Input style={styles.input} placeholder="نظر خود را بنویسید ..." placeholderTextColor={colors.clouds}  />
+                                <Input 
+                                    style={styles.input} 
+                                    placeholder="نظر خود را بنویسید ..." 
+                                    placeholderTextColor={colors.clouds}  
+                                    onChangeText={commentBody=>{this.setState({commentBody})}}
+                                    value={this.state.commentBody}
+                                />
                             </View>
                             <View style={{flex : 1}}>
-                                <Button transparent>
+                                <Button transparent disabled={this.state.comments === null ? true : false} onPress={this.addComment}>
                                     <Icon type="FontAwesome5" name="paper-plane" style={{color : colors.clouds}} />
                                 </Button>
                             </View>
@@ -175,6 +257,19 @@ const styles =  StyleSheet.create({
         borderColor : colors.clouds,
         textAlign : 'center',
         color : colors.clouds
+    },
+    mainImgContainer : {
+        width : '65%' , 
+        alignSelf : 'center',
+        aspectRatio : 1/1 , 
+        display : 'flex',
+        position : 'relative',
+        marginVertical : 15
+    } , 
+    mainImg : {
+        width : '100%',
+        height : '100%',
+        borderRadius : 15
     }
 })
 
