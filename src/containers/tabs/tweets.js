@@ -3,7 +3,7 @@ import {
     View,
     StyleSheet,
     FlatList,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 import { Icon, Button } from 'native-base';
 import { connect } from 'react-redux';
@@ -20,6 +20,7 @@ class Tweets extends Component {
             isRefreshing: false,
             hasScrolled: false,
             scrollDirection: "up",
+            tweets : []
         }
     }
 
@@ -28,59 +29,70 @@ class Tweets extends Component {
         tabBarIcon: ({ tintColor }) => (<Icon type="FontAwesome5" name="quote-right" style={{ color: tintColor }} />)
     }
 
-    fetchMore = () => {
-        if (this.state.refreshing) {
-            return null;
-        }
-        alert('reachedEnd')
-    };
+    // fetchMore = () => {
+    //     if (this.state.refreshing) {
+    //         return null;
+    //     }
+    //     alert('reachedEnd')
+    // };
 
     getTweets = () => {
         Axios.get('http://192.168.1.4:4001/tweets/fetch')
         .then(res => {
             console.log(res);
+            this.setState({ tweets: res.data.data });
         })
         .catch(err => {
             console.log(err);
         })
     }
 
-    render() {
-        tweets.map((item) => {
-            item.key = item.id
-        })
+    componentWillMount(){
         this.getTweets();
+    }
+
+    render() {
         return (
             <View style={styles.wrapper}>
                 <FlatList
-                    data={tweets}
+                    data={this.state.tweets}
                     renderItem={({ item }) => (
-                        <TouchableOpacity onPress={() => { this.props.navProperty.navigate('Detail') }}>
+                        <TouchableOpacity onPress={() => { this.props.navProperty.navigate('Detail' , {
+                                id:item._id , 
+                                type : 'tweet',
+                                date: new Date(item.createTime)
+                            }) }}>
                             <TweetCard
-                                username={item.username}
-                                avatar={item.avatar}
-                                tweet={item.tweet}
-                                hits={item.hits}
-                                comments={item.comments}
-                                date={item.date}
+                                username={item.userName}
+                                tweet={item.content}
+                                hits={item.likes.length}
+                                comments={item.comments.length}
+                                date={item.createTime}
                             />
                         </TouchableOpacity>
                     )}
                     refreshing={this.state.isRefreshing}
                     onRefresh={() => {
                         this.setState({ isRefreshing: true });
+                        this.getTweets();
                         setTimeout(() => {
-                            alert("refreshed");
                             this.setState({ isRefreshing: false });
                         }, 2000)
                     }}
-                    onEndReached={this.fetchMore}
-                    onEndReachedThreshold={0.1}
-
                 />
-                <Button block style={{ backgroundColor: colors.emerland }} onPress={() => { this.props.navProperty.navigate('AddTweet') }}>
-                    <Icon type="FontAwesome5" name="pen" style={{ color: colors.clouds }} />
-                </Button>
+                {
+                    this.props.userType != "user" ? (
+                        <Button block style={{ backgroundColor: colors.emerland }} onPress={() => {
+                            this.props.navProperty.navigate('AddTweet', {
+                                refresh: this.getTweets
+                            })
+                        }}>
+                            <Icon type="FontAwesome5" name="pen" style={{ color: colors.clouds }} />
+                        </Button>
+                    ) : (
+                        <View />
+                    )
+                }
             </View>
         )
     }
@@ -96,7 +108,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        navProperty: state.navReducer.navProperty
+        navProperty: state.navReducer.navProperty , 
+        userType : state.userReducer.userType
     }
 }
 

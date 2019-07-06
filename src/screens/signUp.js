@@ -33,11 +33,11 @@ class SignUp extends Component{
     showSignUpFrom = () => {
         if(this.state.selected === "key0"){
             return(
-                <RegularSignUp />
+                <RegularSignUp navigation={this.props.navigation} />
             )
         } else {
             return(
-                <LawyerSignUp />
+                <LawyerSignUp navigation={this.props.navigation} />
             )
         }
     }

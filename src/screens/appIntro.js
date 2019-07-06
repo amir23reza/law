@@ -15,7 +15,10 @@ import CustomHeader from '../components/customHeader';
 
 class Intro extends Component {
     componentWillMount(){
-        this.props.addNav(this.props.navigation)
+        this.props.addNav(this.props.navigation);
+        if(this.props.isLoggedIn){
+            this.props.navigation.navigate('MainScreen');
+        }
     }
     render() {
         return (
@@ -70,9 +73,9 @@ class Intro extends Component {
                     <View style={styles.slideContainer}>
                         <SlideContent
                             navigation={this.props.navigation}
-                            title={"لورم"}
-                            text={"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد."}
-                            imageSource={require("../images/law.jpg")}
+                            title={"ثبت نام"}
+                            text={"شما می توانید از این صفحه چه به عنوان کاربر عادی و چه به عنوان وکیل ثبت نام کنید \n از آنجا که کد ملی شما برای ثبت نام نیاز است تنها یک بار قابلیت ثبت نام دارید."}
+                            imageSource={require("../images/appIntro/1.png")}
                             skip={true}
                             checked={false}
                         />
@@ -80,9 +83,9 @@ class Intro extends Component {
                     <View style={styles.slideContainer}>
                         <SlideContent
                             navigation={this.props.navigation}
-                            title={"لورم"}
-                            text={"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد."}
-                            imageSource={require("../images/law.jpg")}
+                            title={"افزودن سوال"}
+                            text={"شما می توانید از این طریق وارد فرم افزودن سوال بشوید و مسائل حقوقی خود را مطرح کنید \n هم وکلا و هم کابران عادی قابلیت مطرح کردن سوال را دارند."}
+                            imageSource={require("../images/appIntro/2.jpg")}
                             skip={false}
                             checked={false}
                         />
@@ -90,9 +93,9 @@ class Intro extends Component {
                     <View style={styles.slideContainer}>
                         <SlideContent
                             navigation={this.props.navigation}
-                            title={"لورم"}
-                            text={"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد."}
-                            imageSource={require("../images/law.jpg")}
+                            title={"افزودن توییت"}
+                            text={"تنها وکلا قادر هستند تا مسائل و نکات قابل توجه حقوقی خود را به عنوان توییت بنویسند"}
+                            imageSource={require("../images/appIntro/3.png")}
                             skip={false}
                             checked={false}
                         />
@@ -100,9 +103,9 @@ class Intro extends Component {
                     <View style={styles.slideContainer}>
                         <SlideContent
                             navigation={this.props.navigation}
-                            title={"لورم"}
-                            text={"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد."}
-                            imageSource={require("../images/law.jpg")}
+                            title={"خروج از حساب کاربری"}
+                            text={"شما می توانید از این بخش از حساب کاربری خود خارج شوید."}
+                            imageSource={require("../images/appIntro/4.jpg")}
                             skip={false}
                             checked={true}
                         />
@@ -122,7 +125,10 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => {
-    return {}
+    console.log(state)
+    return {
+        isLoggedIn : state.userReducer.isLoggedIn , 
+    }
 }
 
 const mapDispatchToProps = (dispatch) => {

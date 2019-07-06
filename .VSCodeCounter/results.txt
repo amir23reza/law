@@ -1,0 +1,76 @@
+Date : 2019-07-06 22:57:38
+Directory : f:\Work\REACT NATIVE\law\src
+Total : 38 files,  3392 codes, 95 comments, 206 blanks, all 3693 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| JavaScript React |         34 |      3,107 |         95 |        206 |      3,408 |
+| JSON             |          4 |        285 |          0 |          0 |        285 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------+------------+------------+------------+------------+------------+
+| path                              | files      | code       | comment    | blank      | total      |
++-----------------------------------+------------+------------+------------+------------+------------+
+| .                                 |         38 |      3,392 |         95 |        206 |      3,693 |
+| screens                           |         11 |      1,361 |         21 |         73 |      1,455 |
+| containers                        |          9 |        999 |         73 |         83 |      1,155 |
+| components                        |          6 |        536 |          0 |         32 |        568 |
+| containers\forms                  |          2 |        453 |         61 |         32 |        546 |
+| data                              |          4 |        285 |          0 |          0 |        285 |
+| containers\tabs                   |          3 |        284 |         12 |         32 |        328 |
+| redux                             |          5 |        130 |          0 |         13 |        143 |
+| containers\slides                 |          1 |        120 |          0 |          4 |        124 |
+| redux\actions                     |          2 |         68 |          0 |          5 |         73 |
+| redux\reducers                    |          3 |         62 |          0 |          8 |         70 |
+| navigators                        |          2 |         59 |          1 |          5 |         65 |
+| containers\lists                  |          1 |         32 |          0 |          7 |         39 |
+| styles                            |          1 |         22 |          0 |          0 |         22 |
++-----------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------+------------------+------------+------------+------------+------------+
+| filename                          | language         | code       | comment    | blank      | total      |
++-----------------------------------+------------------+------------+------------+------------+------------+
+| components\FAB.js                 | JavaScript React |         33 |          0 |          5 |         38 |
+| components\customHeader.js        | JavaScript React |         56 |          0 |          7 |         63 |
+| components\customInput.js         | JavaScript React |        114 |          0 |          7 |        121 |
+| components\simpleCard.js          | JavaScript React |        100 |          0 |          6 |        106 |
+| components\tweetCard.js           | JavaScript React |         92 |          0 |          3 |         95 |
+| components\userCard.js            | JavaScript React |        141 |          0 |          4 |        145 |
+| containers\collapseContainer.js   | JavaScript React |         66 |          0 |          6 |         72 |
+| containers\forms\lawyerSignUp.js  | JavaScript React |        231 |         37 |         18 |        286 |
+| containers\forms\regularSignUp.js | JavaScript React |        222 |         24 |         14 |        260 |
+| containers\lists\lists.js         | JavaScript React |         32 |          0 |          7 |         39 |
+| containers\mainContainer.js       | JavaScript React |         44 |          0 |          2 |         46 |
+| containers\slides\slideContent.js | JavaScript React |        120 |          0 |          4 |        124 |
+| containers\tabs\latestNews.js     | JavaScript React |         89 |          3 |         12 |        104 |
+| containers\tabs\popularNews.js    | JavaScript React |         97 |          2 |         10 |        109 |
+| containers\tabs\tweets.js         | JavaScript React |         98 |          7 |         10 |        115 |
+| data\questions.json               | JSON             |        134 |          0 |          0 |        134 |
+| data\statusList.json              | JSON             |         47 |          0 |          0 |         47 |
+| data\tweets.json                  | JSON             |         83 |          0 |          0 |         83 |
+| data\users.json                   | JSON             |         21 |          0 |          0 |         21 |
+| navigators\stackNavigator.js      | JavaScript React |         28 |          0 |          2 |         30 |
+| navigators\tabNavigator.js        | JavaScript React |         31 |          1 |          3 |         35 |
+| redux\actions\actions.js          | JavaScript React |         61 |          0 |          4 |         65 |
+| redux\actions\types.js            | JavaScript React |          7 |          0 |          1 |          8 |
+| redux\reducers\navReducer.js      | JavaScript React |         16 |          0 |          3 |         19 |
+| redux\reducers\reducer.js         | JavaScript React |          8 |          0 |          2 |         10 |
+| redux\reducers\userReducer.js     | JavaScript React |         38 |          0 |          3 |         41 |
+| screens\addQuestion.js            | JavaScript React |        146 |         11 |          8 |        165 |
+| screens\addTweet.js               | JavaScript React |        103 |          2 |          9 |        114 |
+| screens\appIntro.js               | JavaScript React |        135 |          0 |          5 |        140 |
+| screens\detail.js                 | JavaScript React |        320 |          5 |         12 |        337 |
+| screens\information.js            | JavaScript React |         77 |          0 |          3 |         80 |
+| screens\mainScreen.js             | JavaScript React |         52 |          0 |          3 |         55 |
+| screens\profile.js                | JavaScript React |        114 |          0 |          5 |        119 |
+| screens\signIn.js                 | JavaScript React |        142 |          2 |         12 |        156 |
+| screens\signUp.js                 | JavaScript React |        116 |          1 |          7 |        124 |
+| screens\splashScreen.js           | JavaScript React |         65 |          0 |          7 |         72 |
+| screens\userProfile.js            | JavaScript React |         91 |          0 |          2 |         93 |
+| styles\colors.js                  | JavaScript React |         22 |          0 |          0 |         22 |
+| Total                             |                  |      3,392 |         95 |        206 |      3,693 |
++-----------------------------------+------------------+------------+------------+------------+------------+

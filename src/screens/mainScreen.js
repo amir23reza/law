@@ -1,8 +1,12 @@
 import React , {Component} from 'react';
 import { Text, View, } from 'react-native';
-import { Button , Title } from 'native-base'
+import { Button , Title, Icon } from 'native-base'
 import AppContainer from '../navigators/tabNavigator';
 import MainContainer from '../containers/mainContainer';
+import {connect} from 'react-redux';
+import {
+    logoutUser
+} from '../redux/actions/actions';
 import colors from '../styles/colors';
 
 class MainScreen extends Component {
@@ -10,8 +14,8 @@ class MainScreen extends Component {
         return(
             <MainContainer 
                 right={ 
-                    <Button transparent onPress={()=>{this.props.navigation.navigate('Profile')}}>
-                        <Text style={{fontFamily : "IRANSans" , color : 'white'}}>پروفایل</Text>
+                    <Button transparent onPress={()=>{this.props.logout();this.props.navigation.navigate('AppIntro')}}>
+                        <Icon type="FontAwesome5" name="sign-out-alt" solid />
                     </Button>
                 }
                 body={
@@ -39,5 +43,13 @@ class MainScreen extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {}
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout: () => { dispatch(logoutUser()) }
+    }
+}
 
-export default MainScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen)

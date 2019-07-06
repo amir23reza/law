@@ -3,23 +3,33 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    Share
 } from 'react-native';
 import { Icon, Card, Title, Thumbnail, CardItem, Body, Left, Right } from 'native-base';
 import colors from '../styles/colors';
+import JDATE from 'jalali-date';
 
 class TweetCard extends Component {
     render() {
-        const {username , avatar  , tweet , hits , comments , date} = this.props;
+        const {username  , tweet , hits , comments , date} = this.props;
+        var d = new Date(date);
+        var year = d.getFullYear();
+        var month = d.getMonth();
+        var day = d.getDate();
+        var hour = d.getHours();
+        var minute = d.getMinutes();
+        var jDate = new JDATE(new Date(year , month , day));
         return (
             <Card style={styles.tweetCard}>
                 <CardItem header style={styles.header}>
                     <Body style={{ justifyContent: "center" , flex : 4}}>
                         <Text style={styles.username}>{username}</Text>
-                        <Text style={styles.date}>6 ساعت پیش</Text>
+                        <Text style={styles.date}>{jDate.format('dddd DD MMMM YYYY')}</Text>
+                        <Text style={styles.date}>{hour + " : " + minute}</Text>
                     </Body>
                     <Right style={{flex : 1}}>
-                        <Thumbnail source={require("../images/user_logo.png")} />
+                        <Thumbnail source={require("../images/lawyer_logo.png")} />
                     </Right>
                 </CardItem>
                 <View style={{display : 'flex' , position : 'relative' , margin : 15}}>
@@ -41,9 +51,12 @@ class TweetCard extends Component {
                         </Text>
                     </View>
                     <View style={{ flex: 1 , alignContent : 'center' , alignItems : 'center' }}>
-                        <Text>
+                        <TouchableOpacity onPress={()=>{Share.share({
+                                title : "توییت وکلا", 
+                                message : "وکیل " + username + " : \n" + tweet
+                            })}}>
                             <Icon type="FontAwesome5" name="share-alt" />
-                        </Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Card>

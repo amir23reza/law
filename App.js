@@ -6,6 +6,7 @@ import X from './src/screens/detail'
 import {Provider} from 'react-redux'
 import {createStore} from 'redux';
 import reducer from './src/redux/reducers/reducer';
+import {getUser} from './src/redux/actions/actions';
 // --- redux --- //
 
 const store = createStore(reducer); 
@@ -20,7 +21,9 @@ export default class App extends Component{
 
   componentWillMount() {
     console.disableYellowBox = true;
+    getUser(store.dispatch);
   }
+  
   render() {
     setTimeout(() => {
       this.setState({isSplash : false})

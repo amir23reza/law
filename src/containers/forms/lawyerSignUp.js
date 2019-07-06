@@ -15,6 +15,8 @@ import {
     TouchableOpacity
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import {connect} from 'react-redux';
+import {PersistUser} from '../../redux/actions/actions';
 import colors from '../../styles/colors';
 import CustomInput from '../../components/customInput';
 import Axios from 'axios';
@@ -41,7 +43,7 @@ class LawyerSignUp extends Component {
             aboutMe : null , 
             type : 'lawyer'
         }
-    }
+    } 
 
     uploadForm = () => {
         Axios.post('http://192.168.1.4:4001/users/signUp', {
@@ -56,8 +58,10 @@ class LawyerSignUp extends Component {
             console.log(res);
             // persist the user data here
             // navigate the user to the main page if ok
+            this.props.register_persist(res.data.newUser._id, res.data.newUser.fullName, res.data.newUser.type);
+            this.props.navigation.navigate('MainScreen')
         }).catch(err => {
-            alert(err)
+            alert("این ایمیل یا کد ملی قبلا ثبت شده است.")
         })
     }
 
@@ -270,4 +274,13 @@ const styles = StyleSheet.create({
     },
 })
 
-export default LawyerSignUp;
+const mapStateToProps = (state) => {
+    return {}
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        register_persist: (userId, userName, type) => { dispatch(PersistUser(userId, userName, type)) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LawyerSignUp)

@@ -7,10 +7,18 @@ import {
 } from 'react-native';
 import { Icon, Card, Title, Thumbnail, CardItem, Body, Left, Right } from 'native-base';
 import colors from '../styles/colors';
+import JDATE from 'jalali-date';
 
 class SimpleCard extends Component {
     render() {
-        const {username , avatar , title , description , hits , comments , dateTime} = this.props;
+        const {username , title , description , hits , comments , date} = this.props;
+        var d = new Date(date);
+        var year = d.getFullYear();
+        var month = d.getMonth();
+        var day = d.getDate();
+        var hour = d.getHours();
+        var minute = d.getMinutes();
+        var jDate = new JDATE(new Date(year, month, day));
         return (
             <Card style={styles.simpleCard}>
                 <CardItem header style={styles.header}>
@@ -52,17 +60,8 @@ class SimpleCard extends Component {
                                 <View style={{ flex: 1 }} />
                             </CardItem>
                         ) : (
-                            <CardItem footer>
-                                <View style={{ flex: 1 }} />
-                                <View>
-                                    <View style={{ flex: 2 }}>
-                                        <Text style={{ color: colors.midnightblue }}>
-                                            {" "+dateTime+" "}
-                                            <Icon type="FontAwesome5" name="clock" style={{ color: colors.midnightblue }} />
-                                        </Text>
-                                    </View>
-                                </View>
-                                <View style={{ flex: 1 }} />
+                            <CardItem footer style={{backgroundColor : colors.clouds}}>
+                                <Text style={styles.date}>{jDate.format('dddd DD MMMM YYYY') + "\n" + hour + " : " + minute}</Text>
                             </CardItem>
                         )
                     }
@@ -94,6 +93,12 @@ const styles = StyleSheet.create({
         width: '100%' , 
         color : colors.midnightblue ,  
         fontFamily : "IRANSans",
+    } , 
+    date : {
+        width : '100%' , 
+        fontFamily : 'IRANSans' , 
+        color : colors.midnightblue , 
+        textAlign : 'center'
     }
 })
 

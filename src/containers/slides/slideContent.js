@@ -6,6 +6,7 @@ import {
     StyleSheet,
 } from 'react-native';
 import { Title, Button, Icon } from 'native-base';
+import {connect} from 'react-redux';
 import colors from '../../styles/colors';
 
 class SlideContent extends Component {
@@ -18,7 +19,11 @@ class SlideContent extends Component {
             style={styles.skipBtn}
             transparent
             onPress={() => {
-              this.props.navigation.navigate("SignUp");
+              if (this.props.isLoggedIn) {
+                this.props.navigation.navigate("MainScreen");
+              } else {
+                this.props.navigation.navigate("SignUp");
+              }
             }}
           >
             <Text
@@ -37,7 +42,11 @@ class SlideContent extends Component {
             style={styles.checked}
             transparent
             onPress={() => {
-              this.props.navigation.navigate("SignUp");
+              if (this.props.isLoggedIn) {
+                this.props.navigation.navigate("MainScreen");
+              } else {
+                this.props.navigation.navigate("SignUp"); 
+              }
             }}
           >
             <Icon
@@ -106,4 +115,10 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SlideContent;
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.userReducer.isLoggedIn
+  }
+}
+
+export default connect(mapStateToProps)(SlideContent);

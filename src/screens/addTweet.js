@@ -16,6 +16,7 @@ import {
     Textarea
 } from 'native-base';
 import MainContainer from '../containers/mainContainer';
+import {connect} from 'react-redux';
 import colors from '../styles/colors';
 import Axios from 'axios'
 
@@ -29,13 +30,16 @@ class AddTweet extends Component { // later on implement image picker
 
     addTweet = () => {
         Axios.post('http://192.168.1.4:4001/tweets/add', {
-            "userId": "5d18feb0cdd97f3308e01bd4",
+            "userId": this.props.userId,
             "content": this.state.content , 
-            "userName" : "amir reza"
+            "userName" : this.props.userName
         }).then(res => {
             console.log(res);
             if (res.status == 200) {
-                alert('ok');
+                alert('توییت شما با موفقیت ثبت شد.');
+                var refresh = this.props.navigation.getParam('refresh', () => { });
+                refresh();
+                this.props.navigation.navigate('MainScreen');
             }
         }).catch(err => {
             alert(err)
@@ -99,4 +103,12 @@ const styles = StyleSheet.create({
     }
 })
 
-export default AddTweet
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        userId: state.userReducer.userId,
+        userName: state.userReducer.userName
+    }
+}
+
+export default connect(mapStateToProps)(AddTweet)

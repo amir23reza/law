@@ -7,6 +7,7 @@ import {
   Textarea,
 } from "native-base";
 import colors from "../styles/colors";
+import {connect} from 'react-redux';
 import MainContainer from "../containers/mainContainer";
 import CustomInput from '../components/customInput';
 import Axios from "axios";
@@ -22,19 +23,29 @@ class AddQuestion extends Component {
   }
 
   addQuestion = () => {
-    Axios.post('http://192.168.1.4:4001/questions/add', {
-      "userId": "5d18feb0cdd97f3308e01bd4",
-      "title": this.state.title,
-      "content": this.state.content , 
-      "userName" : "amir reza"
-    }).then(res => {
-      console.log(res);
-      if(res.status == 200){
-        alert('ok');
-      }
-    }).catch(err => {
-      alert(err)
-    })
+    if(this.state.title == null || this.state.title == ""){
+      alert("عنوان سوال نباید خالی باشد.")
+    } else if (this.state.content == null || this.state.content == ""){
+      alert("متن سوال نباید خالی باشد.")
+    } else {
+      Axios.post('http://192.168.1.4:4001/questions/add', {
+        "userId": this.props.userId,
+        "title": this.state.title,
+        "content": this.state.content,
+        "userName": this.props.userName
+      }).then(res => {
+        console.log(res);
+        if (res.status == 200) {
+          alert('سوال شما با موفقیت ثبت شد');
+          // update the question list and get back to main screen
+          var refresh = this.props.navigation.getParam('refresh' , ()=>{});
+          refresh();
+          this.props.navigation.navigate('MainScreen');
+        }
+      }).catch(err => {
+        alert(err)
+      })
+    }
   }
 
   render() {
@@ -142,4 +153,12 @@ const styles = StyleSheet.create({
 }
 });
 
-export default AddQuestion;
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    userId: state.userReducer.userId,
+    userName : state.userReducer.userName
+  }
+}
+
+export default connect(mapStateToProps)(AddQuestion)

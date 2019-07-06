@@ -20,6 +20,7 @@ class PopularNews extends Component {
             isRefreshing: false,
             hasScrolled: false,
             scrollDirection: "up",
+            questions: []
         }
     }
 
@@ -28,57 +29,62 @@ class PopularNews extends Component {
         tabBarIcon: ({ tintColor }) => (<Icon type="FontAwesome5" name="gratipay" style={{ color: tintColor }} />)
     }
 
-    fetchMore = () => {
-        if (this.state.refreshing) {
-            return null;
-        }
-        alert('reachedEnd')
-    };
-
     getQuestions = () => {
         Axios.get('http://192.168.1.4:4001/questions/byLike')
             .then(res => {
-                console.log(res);
+                var tmp = res.data.data;
+                tmp = tmp.sort((a, b) => {
+                    return b.likes.length - a.likes.length
+                })
+                this.setState({ questions: tmp });
             })
             .catch(err => {
                 console.log(err)
             })
     }
 
-    render() {
-        questions.map((item) => {
-            item.key = item.id
-        })
+
+    componentWillMount() {
         this.getQuestions();
+    }
+
+    render() {
         return (
             <View style={styles.wrapper}>
                 <FlatList
-                    data={questions}
+                    data={this.state.questions}
                     renderItem={({ item }) => (
-                        <TouchableOpacity onPress={() => { this.props.navProperty.navigate('Detail') }}>
+                        <TouchableOpacity onPress={() => {
+                            this.props.navProperty.navigate('Detail', {
+                                id: item._id,
+                                type: 'question',
+                                date: new Date(item.createTime)
+                            })
+                        }}>
                             <SimpleCard
-                                username={item.username}
-                                avatar={item.avatar}
+                                username={item.userName}
                                 title={item.title}
-                                description={item.description}
-                                hits={item.hits}
-                                comments={item.commentsNo}
-                            //dateTime={item.dateTime}
+                                description={item.content}
+                                hits={item.likes.length}
+                                comments={item.comments.length}
+                                //date={item.createTime}
                             />
                         </TouchableOpacity>
                     )}
                     refreshing={this.state.isRefreshing}
                     onRefresh={() => {
                         this.setState({ isRefreshing: true });
+                        this.getQuestions();
                         setTimeout(() => {
-                            alert("refreshed");
                             this.setState({ isRefreshing: false });
                         }, 2000)
                     }}
-                    onEndReached={this.fetchMore}
-                    onEndReachedThreshold={0.1}
                 />
-                <Button block style={{ backgroundColor: colors.emerland }} onPress={() => { this.props.navProperty.navigate('AddQuestion') }}>
+                <Button block style={{ backgroundColor: colors.emerland }} onPress={() => {
+                    this.props.navProperty.navigate('AddQuestion', {
+                        refresh: this.getQuestions
+                    })
+                }}>
                     <Icon type="FontAwesome5" name="plus" style={{ color: colors.clouds }} />
                 </Button>
             </View>

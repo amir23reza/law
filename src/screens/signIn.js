@@ -65,6 +65,7 @@ class SignIn extends Component {
             if (data) {
                 // this.props.navigation.navigate('MainScreen')
                 this.props.login_persist(data._id , data.fullName , data.type);
+                this.props.navigation.navigate('MainScreen')
             } else {
                 alert('ایمیل یا رمز عبور وارد شده صحیح نمی باشد.')
             }
